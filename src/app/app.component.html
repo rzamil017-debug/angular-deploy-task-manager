@@ -1,0 +1,16 @@
+<header class="topbar"><a class="brand" href="#"><span class="brand-icon">✓</span>план<span class="brand-period">.</span></a><div class="topbar-right"><span class="sync-dot"></span>Сохранено на этом устройстве</div></header>
+<main class="layout">
+  <aside class="sidebar" aria-label="Фильтры задач"><p class="sidebar-label">СПИСОК</p>
+    <button class="nav-item" [class.selected]="filter === 'all'" (click)="filter = 'all'"><span>▤</span>Все задачи <b>{{ tasks.length }}</b></button>
+    <button class="nav-item" [class.selected]="filter === 'active'" (click)="filter = 'active'"><span>◷</span>В процессе <b>{{ activeCount }}</b></button>
+    <button class="nav-item" [class.selected]="filter === 'done'" (click)="filter = 'done'"><span>✓</span>Выполнено <b>{{ completedCount }}</b></button>
+    <div class="tip"><strong>✦ Маленький шаг — тоже прогресс.</strong><p>Отмечай готовое и двигайся дальше.</p></div>
+  </aside>
+  <section class="workspace"><div class="heading"><div><small>МОЙ ПРОЕКТ</small><h1>{{ heading }}</h1><p>Держи важное в фокусе — остальное сделаем по шагам.</p></div><time>{{ today }}</time></div>
+    <div class="progress"><div><small>ПРОГРЕСС ПРОЕКТА</small><b>{{ completedCount }} / {{ tasks.length }} задач</b></div><div class="track"><i [style.width.%]="progress"></i></div><footer>Хороший темп, продолжай! <b>{{ progress }}%</b></footer></div>
+    <form class="add" (ngSubmit)="addTask()"><span>＋</span><input name="newTask" [(ngModel)]="newTask" placeholder="Добавить задачу..." aria-label="Название новой задачи" autocomplete="off"><button [disabled]="!newTask.trim()">Добавить ↵</button></form>
+    <div class="list-heading"><h2>Задачи <small>{{ filteredTasks.length }}</small></h2><button (click)="clearCompleted()" [disabled]="completedCount === 0">Очистить выполненные</button></div>
+    <div class="task-list">@for (task of filteredTasks; track task.id) {<article class="task" [class.done]="task.done"><button class="check" [class.checked]="task.done" (click)="toggle(task)" [attr.aria-label]="task.done ? 'Вернуть задачу в работу' : 'Отметить задачу выполненной'">@if(task.done){✓}</button><span>{{ task.title }}</span>@if(!task.done){<small>В работе</small>}<button class="delete" (click)="remove(task)" aria-label="Удалить задачу">×</button></article>} @empty {<div class="empty"><b>Список пока пуст</b><p>Добавь первую задачу в поле выше.</p></div>}</div>
+    <div class="list-footer">✓ Изменения сохраняются автоматически <span>Задач в списке: {{ tasks.length }}</span></div>
+  </section>
+</main>
