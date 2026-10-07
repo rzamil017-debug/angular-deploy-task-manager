@@ -1,20 +1,20 @@
-# План — Angular task manager
+# Angular task manager
 
-Небольшое Angular-приложение для управления задачами: добавление, фильтрация, отметка выполнения, удаление, прогресс и автоматическое сохранение в браузере.
+Небольшое Angular-приложение для списка задач. Можно добавлять задачи, отмечать выполненные, фильтровать, удалять и смотреть прогресс. Данные сохраняются в браузере.
 
-## Локальный запуск
+## Запуск локально
 
-Требуются Node.js 24.15+ и pnpm 11.
+Требуются Node.js 24 и pnpm 11.
 
 ```sh
 pnpm install
 pnpm start
 ```
 
-Сборка: `pnpm build`. Результат — `dist/angular-deploy-task-manager/browser`.
+Production-сборка: `pnpm build`. Файлы сборки находятся в `dist/angular-deploy-task-manager/browser`.
 
 ## CI/CD
 
-GitHub Actions собирает приложение для pull request и при push в `main`. После успешной сборки workflow собирает production-версию и публикует её в Vercel. В GitHub → Settings → Secrets and variables → Actions добавьте `VERCEL_TOKEN`, `VERCEL_ORG_ID` и `VERCEL_PROJECT_ID`.
+GitHub Actions автоматически устанавливает зависимости и собирает приложение на pull request и при каждом push в `main`.
 
-Файл `vercel.json` задаёт каталог сборки и SPA rewrite на `index.html`.
+Для публикации подключите этот GitHub-репозиторий в Vercel. Vercel будет автоматически собирать и публиковать коммиты из `main`; в настройках проекта Vercel укажите команду сборки `pnpm build` и каталог `dist/angular-deploy-task-manager/browser`. Файл `vercel.json` настраивает каталог и SPA-маршрутизацию на `index.html`.
