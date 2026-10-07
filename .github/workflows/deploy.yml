@@ -23,7 +23,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.19.0
-          cache: pnpm
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
       - name: Build Angular app
@@ -44,7 +43,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.19.0
-          cache: pnpm
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
       - name: Pull Vercel project settings
